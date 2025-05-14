@@ -11,9 +11,19 @@
 
 
 <body>
+    @session('success')
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endsession
+    @session('error')
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endsession
     <div class="container">
         <h1>Login</h1>
-        <form action="{{ route('login') }}" method="POST">
+        <form action="{{ route('login.user') }}" method="POST">
             @csrf
             <div class="box">
                 <div>

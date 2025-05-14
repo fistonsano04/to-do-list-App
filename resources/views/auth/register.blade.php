@@ -11,9 +11,19 @@
 
 
 <body>
+    @session('success')
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endsession
+    @session('error')
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endsession
     <div class="container">
         <h1>Create Account</h1>
-        <form action="{{ route('register') }}" method="POST">
+        <form action="{{ route('register.user') }}" method="POST">
             @csrf
             <div class="box">
                 <div>
@@ -28,11 +38,14 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-            </div>
-            <button type="submit">Register</button>
-            <div>
-                <a href="{{ route('login') }}">Already have an account? Login</a>
-            </div>
+                <div>
+                    <label for="password_confirmation">Confirm:</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required>
+                </div>
+                <button type="submit">Register</button><br> <br>
+                <div>
+                    <a href="{{ route('login') }}">Already have an account? Login</a>
+                </div>
 
         </form>
 
