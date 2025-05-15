@@ -18,7 +18,7 @@
         font-family: 'poppins', sans-serif;
     }
 
-    .container{
+    .box1{
         width: 100%;
         max-width: 600px;
         height: 100vh;
@@ -27,12 +27,12 @@
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    .container .title h2{
+    .box1 .title h2{
         text-align: center;
         margin-bottom: 20px;
         color: #333;
     }
-    .container .title h2::after{
+    .box1 .title h2::after{
         content: '';
         display: block;
         width: 50px;
@@ -41,19 +41,19 @@
         margin: 10px auto;
         border-radius: 5px;
     }
-.container .content{
+.box1 .content{
     margin-bottom: 20px;
     padding:20px;
     text-align: justify;
 }
-.container .content label{
+.box1 .content label{
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
-.container .content input[type="text"],
-.container .content input[type="date"],
-.container .content select{
+.box1 .content input[type="text"],
+.box1 .content input[type="date"],
+.box1 .content select{
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -61,16 +61,16 @@
     border-radius: 5px;
     font-size: 16px;
 }
-.container .content input[type="text"]:focus,
-.container .content input[type="date"]:focus,
-.container .content select:focus{
+.box1 .content input[type="text"]:focus,
+.box1 .content input[type="date"]:focus,
+.box1 .content select:focus{
     border-color: #007bff;
     outline: none;
 }
-.container .btn{
+.box1 .btn{
     text-align: center;
 }
-.container .btn button{
+.box1 .btn button{
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -80,22 +80,23 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.container .btn button:hover{
+.box1 .btn button:hover{
     background-color: #0056b3;
 }
-.container .btn button:active{
+.box1 .btn button:active{
     background-color: #004494;
 }
-.container .btn button:focus{
+.box1 .btn button:focus{
     outline: none;
 }
-.container .btn button:focus-visible{
+.box1 .btn button:focus-visible{
     box-shadow: 0 0 0 2px rgba(0,123,255,0.5);
 }
 
 </style>
 <body>
     <div class="container">
+    <div class="box1">
         <div class="title">
             <h2>ToDo List App</h2>
         </div>
@@ -138,7 +139,46 @@
             </form>
         </div>
     </div>
+    <div class="box2">
+        <div class="result">
+            <h2>Task List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Priority</th>
+                        <th>Due Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($tasks as $task)
+                    <tr>
+                        <td>{{ $task->taskName }}</td>
+                        <td>{{ $task->taskDescription }}</td>
+                        <td>{{ $task->taskStatus }}</td>
+                        <td>{{ $task->taskPriority }}</td>
+                        <td>{{ $task->taskDueDate }}</td>
+                        <td>
+                            <form action="{{ route('deleteTask', $task->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
 
+            </table>
+            <div class="paginate">
+                {{$tasks->links}}
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
