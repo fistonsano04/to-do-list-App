@@ -88,6 +88,15 @@
             <div class="result">
                 <div class="total">
                     <p>Total Tasks: {{ $tasks->total() }}</p>
+                    <p>Pending Tasks: {{ $tasks->where('taskStatus', 'pending')->count() }}</p>
+                    <p>In Progress Tasks: {{ $tasks->where('taskStatus', 'in_progress')->count() }}</p>
+                    <p>Completed Tasks: {{ $tasks->where('taskStatus', 'completed')->count() }}</p>
+                </div>
+                <div class="logout">
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit"><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
+                    </form>
                 </div>
                 <table>
                     <thead>

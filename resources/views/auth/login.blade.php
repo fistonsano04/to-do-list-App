@@ -11,14 +11,29 @@
 
 
 <body>
-    @session('success')
+  @session('success')
         <div class="alert alert-success">
-            {{ session('success') }}
+            <div class="message">
+                {{ session('success') }}
+            </div>
+            <div class="close">
+                <span>
+                    <i class="fa-solid fa-xmark"></i>
+
+                </span>
+            </div>
         </div>
     @endsession
     @session('error')
         <div class="alert alert-danger">
-            {{ session('error') }}
+            <div class="message">
+                {{ session('error') }}
+            </div>
+            <div class="close">
+                <span>
+                    <i class="fa-solid fa-xmark"></i>
+                </span>
+            </div>
         </div>
     @endsession
     <div class="container">
