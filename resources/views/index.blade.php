@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>ToDo List App</title>
 </head>
 
@@ -68,6 +71,9 @@
                 <h2>Task List</h2>
             </div>
             <div class="result">
+                <div class="total">
+                    <p>Total Tasks: {{ $tasks->total() }}</p>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -86,12 +92,12 @@
                                 <td>{{ $task->taskDescription }}</td>
                                 <td>{{ $task->taskStatus }}</td>
                                 <td>{{ $task->taskPriority }}</td>
-                                <td>{{ $task->taskDueDate }}</td>
+                                <td>{{ $task->taskDueDate->format('d M y') }}</td>
                                 <td>
                                     <form action="{{ route('deleteTask', $task->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit">Delete</button>
+                                        <button type="submit"><i class="fa-solid fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -100,6 +106,7 @@
 
                 </table>
                 <div class="paginate">
+                    
                     {{ $tasks->links() }}
                 </div>
             </div>
