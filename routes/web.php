@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\taskController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,9 +18,12 @@ Route::group([AuthController::class], function () {
     Route::post('register', [AuthController::class, 'register'])->name('register.user');
     Route::post('login', [AuthController::class, 'login'])->name('login.user');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
 });
 Route::group(['middleware' => 'auth'], function () {
     Route::get('home', function () {
         return view('index');
     })->name('home');
+Route::post('save-task',[taskController::class, 'saveTask'])->name('save.task');
 });
+

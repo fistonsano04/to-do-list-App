@@ -6,7 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo List App</title>
 </head>
+<style>
+    *{
+        padding:0;
+        margin:0;
+        box-sizing: border-box;
+        transiition: all 0.3s ease;
+    }
+    body{
+        background-color: #f0f0f0;
+        font-family: 'poppins', sans-serif;
+    }
 
+    .container{
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+</style>
 <body>
     <div class="container">
         <div class="title">
