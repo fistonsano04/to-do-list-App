@@ -14,12 +14,27 @@
 <body>
     @session('success')
         <div class="alert alert-success">
-            {{ session('success') }}
+            <div class="message">
+                {{ session('success') }}
+            </div>
+            <div class="close">
+                <span>
+                    <i class="fa-solid fa-xmark"></i>
+
+                </span>
+            </div>
         </div>
     @endsession
     @session('error')
         <div class="alert alert-danger">
-            {{ session('error') }}
+            <div class="message">
+                {{ session('error') }}
+            </div>
+            <div class="close">
+                <span>
+                    <i class="fa-solid fa-xmark"></i>
+                </span>
+            </div>
         </div>
     @endsession
     <div class="container">
@@ -106,12 +121,20 @@
 
                 </table>
                 <div class="paginate">
-                    
+
                     {{ $tasks->links() }}
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        let close = document.querySelector('.close');
+        let alert = document.querySelector('.alert');
+        close.addEventListener('click', function() {
+            alert.style.display = 'none';
+        })
+    </script>
 </body>
 
 </html>

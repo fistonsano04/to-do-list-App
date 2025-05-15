@@ -11,7 +11,7 @@ class taskController extends Controller
     public function index()
     {
 
-        $tasks = Task::paginate(1);
+        $tasks = Task::paginate(10);
         return view('index', [
             'tasks' => $tasks
         ]);
@@ -51,6 +51,18 @@ class taskController extends Controller
         } catch (\Exception $e) {
             Log::error('Error saving task: ' . $e->getMessage());
             return redirect()->back()->withErrors('An error occurred while saving the task.');
+        }
+    }
+
+    public function deleteTask($id){
+        try{
+            $task=task::findOrFail($id);
+            $task->delete();
+            return redirect()->back()->with('success', 'Task deleted successfully');
+        }
+        catch(\Exception $e){
+            Log::error('Error deleting task: ' . $e->getMessage());
+            return redirect()->back()->withErrors('An error occurred while deleting the task.');
         }
     }
 }

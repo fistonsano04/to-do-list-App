@@ -24,6 +24,6 @@ Route::group(['middleware' => 'auth'], function () {
         return view('index');
     })->name('home');
     Route::post('save-task', [taskController::class, 'saveTask'])->name('save.task');
-    Route::post('delete-task', [taskController::class, 'deleteTask'])->name('deleteTask');
+    Route::delete('delete-task/{id}', [taskController::class, 'deleteTask'])->name('deleteTask');
     Route::get('/home', [taskController::class, 'index'])->name('home');
 });
