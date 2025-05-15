@@ -21,17 +21,33 @@
     .container{
         width: 100%;
         max-width: 600px;
-        margin: 0 auto;
+        margin: 100px auto;
         padding: 20px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
+    .container .title h2{
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    .container .title h2::after{
+        content: '';
+        display: block;
+        width: 50px;
+        height: 3px;
+        background-color: #007bff;
+        margin: 10px auto;
+        border-radius: 5px;
+    }
+
+    
 </style>
 <body>
     <div class="container">
         <div class="title">
-            <h2>ToDo List</h2>
+            <h2>ToDo List App</h2>
         </div>
         <div class="content">
             <form action="" method="post">
