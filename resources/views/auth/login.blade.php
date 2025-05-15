@@ -11,7 +11,7 @@
 
 
 <body>
-  @session('success')
+    @session('success')
         <div class="alert alert-success">
             <div class="message">
                 {{ session('success') }}
@@ -67,6 +67,14 @@
             </div>
         @endif
     </div>
+
+    <script>
+        let close = document.querySelector('.close');
+        let alert = document.querySelector('.alert');
+        close.addEventListener('click', function() {
+            alert.style.display = 'none';
+        })
+    </script>
 </body>
 
 </html>

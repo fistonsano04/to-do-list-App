@@ -81,60 +81,63 @@
                 </form>
             </div>
         </div>
-        <div class="box2">
-            <div class="title">
-                <h2>Task List</h2>
-            </div>
-            <div class="result">
-                <div class="total">
-                    <p>Total Tasks: {{ $tasks->total() }}</p>
-                    <p>Pending Tasks: {{ $tasks->where('taskStatus', 'pending')->count() }}</p>
-                    <p>In Progress Tasks: {{ $tasks->where('taskStatus', 'in_progress')->count() }}</p>
-                    <p>Completed Tasks: {{ $tasks->where('taskStatus', 'completed')->count() }}</p>
+        @if ($tasks->isEmpty())
+        @else
+            <div class="box2">
+                <div class="title">
+                    <h2>Task List</h2>
                 </div>
-                <div class="logout">
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        <button type="submit"><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
-                    </form>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Task Name</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Priority</th>
-                            <th>Due Date</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($tasks as $task)
+                <div class="result">
+                    <div class="total">
+                        <p>Total Tasks: {{ $tasks->total() }}</p>
+                        <p>Pending Tasks: {{ $tasks->where('taskStatus', 'pending')->count() }}</p>
+                        <p>In Progress Tasks: {{ $tasks->where('taskStatus', 'in_progress')->count() }}</p>
+                        <p>Completed Tasks: {{ $tasks->where('taskStatus', 'completed')->count() }}</p>
+                    </div>
+                    <div class="logout">
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit"><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
+                        </form>
+                    </div>
+                    <table>
+                        <thead>
                             <tr>
-                                <td>{{ $task->taskName }}</td>
-                                <td>{{ $task->taskDescription }}</td>
-                                <td>{{ $task->taskStatus }}</td>
-                                <td>{{ $task->taskPriority }}</td>
-                                <td>{{ $task->taskDueDate->format('d M y') }}</td>
-                                <td>
-                                    <form action="{{ route('deleteTask', $task->id) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"><i class="fa-solid fa-trash"></i></button>
-                                    </form>
-                                </td>
+                                <th>Task Name</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Priority</th>
+                                <th>Due Date</th>
+                                <th>Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
+                        </thead>
+                        <tbody>
+                            @foreach ($tasks as $task)
+                                <tr>
+                                    <td>{{ $task->taskName }}</td>
+                                    <td>{{ $task->taskDescription }}</td>
+                                    <td>{{ $task->taskStatus }}</td>
+                                    <td>{{ $task->taskPriority }}</td>
+                                    <td>{{ $task->taskDueDate->format('d M y') }}</td>
+                                    <td>
+                                        <form action="{{ route('deleteTask', $task->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
 
-                </table>
-                <div class="paginate">
+                    </table>
+                    <div class="paginate">
 
-                    {{ $tasks->links() }}
+                        {{ $tasks->links() }}
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
 
     <script>
